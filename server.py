@@ -14,11 +14,11 @@ def route_create():
         criteria=request.form['criteria']
         business_value=request.form['business_value']
         estimation = request.form['estimation']
-        with open ("lists.csv","w") as lists:
+        with open ("lists.csv","a") as lists:
             for value in form.items():
-                print(value)
                 row=value[1]+";"
                 lists.write(row)
+            lists.write("\n")
         return redirect('/')
 
 
