@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, request, session
 import csv
+import functions
 
 app = Flask(__name__)
 
@@ -8,28 +9,21 @@ app = Flask(__name__)
 def route_create():
     if request.method == 'POST':
         print("This was a POST")
-        form=request.form
-        title = request.form['title']
-        story=request.form['story']
-        criteria=request.form['criteria']
-        business_value=request.form['business_value']
-        estimation = request.form['estimation']
-        with open ("lists.csv","a") as lists:
-            for value in form.items():
-                row=value[1]+";"
-                lists.write(row)
-            lists.write("\n")
+        form = request.form
+        form_to_file = functions.write_to_file(form)
         return redirect('/')
 
 
-@app.route('/story')
+@app.route('/story', methods=['POST', 'GET'])
 def create_story():
     return render_template('form.html', estimation="2.5", business_value="1000", button="Create")  # , note=note_text)
+
 
 @app.route('/')
 @app.route('/list')
 def show_list():
     return render_template('list.html')
+
 
 if __name__ == "__main__":
     # app.secret_key = 'Content changed'  # Change the content of this string
