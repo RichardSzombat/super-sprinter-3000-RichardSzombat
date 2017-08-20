@@ -46,10 +46,10 @@ def save_edited_story(id_):
     return redirect("/")
 
 
-@app.route("/delete_story/<int:id_>", methods=['POST','GET'])
+@app.route("/delete_story/<int:id_>", methods=['POST', 'GET'])
 def delete_story(id_):
-    all_story=functions.get_story()
-    new_all_story=functions.delete_story(id_,all_story)
+    all_story = functions.get_story()
+    new_all_story = functions.delete_story(id_, all_story)
     functions.write_to_file(new_all_story)
     return redirect("/")
 

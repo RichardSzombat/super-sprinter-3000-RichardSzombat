@@ -13,7 +13,7 @@ def write_to_file(all_story):
 
 def get_story():
     filename = stories_file()
-    all_story=[]
+    all_story = []
     try:
         all_story = [[story.strip() for story in stories.rstrip('\n').split(',')] for stories in open(filename)]
     except FileNotFoundError:
@@ -57,9 +57,10 @@ def find_index_by_id(id_, all_story):
             return index
     raise ValueError("ID not found")
 
-def delete_story(id_,all_story):
+
+def delete_story(id_, all_story):
     for story in all_story:
-        if story[0]==str(id_):
+        if story[0] == str(id_):
             all_story.remove(story)
             return all_story
     return all_story
