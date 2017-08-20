@@ -20,11 +20,11 @@ def get_story():
     return all_story
 
 
-def make_list_from_form(dictionary):
+def make_list_from_form(form_dict):
     table_headers = ["title", "story", "criteria", "business_value", "estimation", "status"]
     story_list = []
     for key in table_headers:
-        story_list.append(dictionary[key])
+        story_list.append(form_dict[key])
     return story_list
 
 

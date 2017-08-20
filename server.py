@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request, session
 import csv
 import functions
+import time
 
 app = Flask(__name__)
 
@@ -21,7 +22,7 @@ def create_story(id_=None):
         try:
             index = functions.find_index_by_id(id_, all_story)
         except ValueError:
-            return
+            return "No such story"
         current_story = all_story[index]
         title = current_story[1]
         story = current_story[2]
@@ -39,13 +40,12 @@ def create_story(id_=None):
     else:
         return render_template('form.html', id_=id_)
 
+
 @app.route("/story/<int:id_>", methods=['POST'])
 def save_edited_story(id_):
-    edited_story=request.form
-    functions.save_edited(id_,edited_story)
+    edited_story = request.form
+    functions.save_edited(id_, edited_story)
     return redirect("/")
-
-
 
 
 @app.route('/')
