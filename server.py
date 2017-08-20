@@ -7,12 +7,8 @@ app = Flask(__name__)
 
 @app.route('/create', methods=['POST', 'GET'])
 def route_create():
-    print("1")
     new_story = request.form
-    print("2")
     functions.save_story(new_story)
-    print("3")
-    #form_to_file = functions.write_to_file2(form)
     return redirect('/')
 
 
@@ -24,7 +20,8 @@ def create_story():
 @app.route('/')
 @app.route('/list')
 def show_list():
-    return render_template('list.html')
+    all_story=functions.get_story()
+    return render_template('list.html',all_story=all_story)
 
 
 if __name__ == "__main__":
