@@ -1,6 +1,3 @@
-import csv
-
-
 def stories_file():
     return "stories.csv"
 
@@ -40,17 +37,11 @@ def save_story(new_story):
 def save_edited(id_, edited_story):
     edited_story = make_list_from_form(edited_story)
     edited_story.insert(0, str(id_))
-    print(edited_story)
     all_story = get_story()
-    print(all_story)
-    print("haho")
     try:
         index = find_index_by_id(id_, all_story)
-        print("index found !")
-        print(index)
     except ValueError:
         return
-    print("ez meg megy")
     all_story[index] = edited_story
     write_to_file(all_story)
 
@@ -60,3 +51,10 @@ def find_index_by_id(id_, all_story):
         if story[0] == str(id_):
             return index
     raise ValueError("ID not found")
+
+def delete_story(id_,all_story):
+    for story in all_story:
+        if story[0]==str(id_):
+            all_story.remove(story)
+            return all_story
+    return all_story

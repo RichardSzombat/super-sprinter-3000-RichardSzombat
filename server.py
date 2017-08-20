@@ -1,7 +1,5 @@
 from flask import Flask, render_template, redirect, request, session
-import csv
 import functions
-import time
 
 app = Flask(__name__)
 
@@ -45,6 +43,14 @@ def create_story(id_=None):
 def save_edited_story(id_):
     edited_story = request.form
     functions.save_edited(id_, edited_story)
+    return redirect("/")
+
+
+@app.route("/delete_story/<int:id_>", methods=['POST','GET'])
+def delete_story(id_):
+    all_story=functions.get_story()
+    new_all_story=functions.delete_story(id_,all_story)
+    functions.write_to_file(new_all_story)
     return redirect("/")
 
 
