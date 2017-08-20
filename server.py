@@ -7,11 +7,13 @@ app = Flask(__name__)
 
 @app.route('/create', methods=['POST', 'GET'])
 def route_create():
-    if request.method == 'POST':
-        print("This was a POST")
-        form = request.form
-        form_to_file = functions.write_to_file(form)
-        return redirect('/')
+    print("1")
+    new_story = request.form
+    print("2")
+    functions.save_story(new_story)
+    print("3")
+    #form_to_file = functions.write_to_file2(form)
+    return redirect('/')
 
 
 @app.route('/story', methods=['POST', 'GET'])
