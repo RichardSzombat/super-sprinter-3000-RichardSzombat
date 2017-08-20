@@ -27,7 +27,7 @@
             <option value="Review"{%if id_ and status=="Review"%}selected{%endif%}>Review</option>
             <option value="Done"{%if id_ and status=="Done"%}selected{%endif%}>Done</option>
         </select>
-        <input type="submit" {%if id_%} value="Update"{%else%} value="Create" {%endif%}>
+        <input type="submit" {%if id_%} value="Update"{%else%} value="Create" {%endif%} id="button">
         </form>
     </body>
 </html>

@@ -4,11 +4,14 @@ def stories_file():
 
 def write_to_file(all_story):
     filename = stories_file()
-    with open(filename, "w") as stories:
-        for story in all_story:
-            line = ",".join(story)
-            stories.write(line + "\n")
-    return
+    try:
+        with open(filename, "w") as stories:
+            for story in all_story:
+                line = ",".join(story)
+                stories.write(line + "\n")
+        return
+    except FileNotFoundError:
+        return
 
 
 def get_story():
@@ -17,7 +20,6 @@ def get_story():
     try:
         all_story = [[story.strip() for story in stories.rstrip('\n').split(',')] for stories in open(filename)]
     except FileNotFoundError:
-        print(all_story)
         return all_story
     return all_story
 

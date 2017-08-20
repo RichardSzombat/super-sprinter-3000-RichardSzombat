@@ -1,5 +1,4 @@
-from flask import Flask, render_template, redirect, request, session
-import functions
+from flask import Flask, render_template, redirect, request
 
 app = Flask(__name__)
 
@@ -62,8 +61,8 @@ def show_list():
 
 
 if __name__ == "__main__":
-    # app.secret_key = 'Content changed'  # Change the content of this string
+    app.secret_key = 'Best secret_key ever' 
     app.run(
-        debug=True,  # Allow verbose error reports
-        port=5000  # Set custom port
+        debug=True, 
+        port=5000 
     )
