@@ -13,15 +13,46 @@ def route_create():
 
 
 @app.route('/story', methods=['POST', 'GET'])
-def create_story():
-    return render_template('form.html', estimation="2.5", business_value="1000", button="Create")  # , note=note_text)
+@app.route('/story/<int:id_>', methods=['GET'])
+def create_story(id_=None):
+    print(id_)
+    if id_:
+        all_story = functions.get_story()
+        try:
+            index = functions.find_index_by_id(id_, all_story)
+        except ValueError:
+            return
+        current_story = all_story[index]
+        title = current_story[1]
+        story = current_story[2]
+        criteria = current_story[3]
+        business_value = current_story[4]
+        estimation = current_story[5]
+        status = current_story[6]
+        return render_template('form.html', title=title,
+                               id_=id_,
+                               story=story,
+                               criteria=criteria,
+                               estimation=estimation,
+                               business_value=business_value,
+                               status=status)
+    else:
+        return render_template('form.html', id_=id_)
+
+@app.route("/story/<int:id_>", methods=['POST'])
+def save_edited_story(id_):
+    edited_story=request.form
+    functions.save_edited(id_,edited_story)
+    return redirect("/")
+
+
 
 
 @app.route('/')
 @app.route('/list')
 def show_list():
-    all_story=functions.get_story()
-    return render_template('list.html',all_story=all_story)
+    all_story = functions.get_story()
+    return render_template('list.html', all_story=all_story)
 
 
 if __name__ == "__main__":

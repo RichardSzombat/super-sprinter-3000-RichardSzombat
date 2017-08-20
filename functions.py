@@ -32,6 +32,31 @@ def save_story(new_story):
     all_story = get_story()
     new_story = make_list_from_form(new_story)
     all_story.append(new_story)
-    id_=str(len(all_story))
-    all_story[-1].insert(0,id_)
+    id_ = str(len(all_story))
+    all_story[-1].insert(0, id_)
     write_to_file(all_story)
+
+
+def save_edited(id_, edited_story):
+    edited_story = make_list_from_form(edited_story)
+    edited_story.insert(0, str(id_))
+    print(edited_story)
+    all_story = get_story()
+    print(all_story)
+    print("haho")
+    try:
+        index = find_index_by_id(id_, all_story)
+        print("index found !")
+        print(index)
+    except ValueError:
+        return
+    print("ez meg megy")
+    all_story[index] = edited_story
+    write_to_file(all_story)
+
+
+def find_index_by_id(id_, all_story):
+    for index, story in enumerate(all_story):
+        if story[0] == str(id_):
+            return index
+    raise ValueError("ID not found")
