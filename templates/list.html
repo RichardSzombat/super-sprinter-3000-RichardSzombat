@@ -9,6 +9,9 @@
         <form action="/story" method="get" >
         <input type="submit" value="Add new story" >
         </form>
+        {% if all_story==[]%}
+        <h2> There is no .csv file or it's empty</h2>
+        {%else%}
         <table border='1px'>
             <tr>
                 <th>ID</th>
@@ -36,6 +39,7 @@
                         </form>
                 </tr>
             {%endfor%}
+        {%endif%}
         </table>
 
     </body>

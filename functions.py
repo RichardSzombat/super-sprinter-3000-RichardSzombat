@@ -13,7 +13,12 @@ def write_to_file(all_story):
 
 def get_story():
     filename = stories_file()
-    all_story = [[story.strip() for story in stories.rstrip('\n').split(',')] for stories in open(filename)]
+    all_story=[]
+    try:
+        all_story = [[story.strip() for story in stories.rstrip('\n').split(',')] for stories in open(filename)]
+    except FileNotFoundError:
+        print(all_story)
+        return all_story
     return all_story
 
 
