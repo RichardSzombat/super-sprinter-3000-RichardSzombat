@@ -2,25 +2,25 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Super Sprinter 3000 - Add new Story</title>
+        <title>Super Sprinter 3000 - {%if id_%}Edit story{%else%}Add new story{%endif%}</title>
     </head>
     <body>   
-        <h1>User Story manager -{%if id_%} Edit story{%else%} Add new story{%endif%}</h1>
+        <h1>User Story Manager -{%if id_%} Edit story{%else%} Add new story{%endif%}</h1>
         <form {%if id_%} action="/story/{{id_}}"{%else%} action="/create"{%endif%} method="post" >
-        <p>Story Title</p>
-        <input type="text" style="width:30%;"value="{{title}}" name="title"/>
-        <p>User Story</p>
-        <textarea rows="5" cols="30" name="story">{{story}}</textarea>
-        <p>Acceptance criteria</p>
-        <textarea rows="5" cols="30"name="criteria">{{criteria}}</textarea>
-        <p>Business Value</p>
-        <input type="number"  name="business_value" min="100" max="1500" step="100"
-        {% if id_ %}value="{{business_value}}" {%else%} value="1000"{%endif%}>
-        <p>Estimation (h)</p>
-        <input type="number"  name="estimation" min="0.5" max="40" step="0.5"
-        {%if id_%}value="{{estimation}}" {%else%} value="2.5"{%endif%}>
-        <p>Status</p>
-        <select name="status">
+        <label for="title">Story Title</label><br>
+        <input type="text" style="width:200px;"value="{{title}}" name="title" id="title"/><br>
+        <label for ="story">User Story</label><br>
+        <textarea rows="5" cols="30" name="story" id="story">{{story}}</textarea><br>
+        <label for ="criteria"> Acceptance criteria </label><br>
+        <textarea rows="5" cols="30"name="criteria" id="criteria">{{criteria}}</textarea><br>
+        <label for="business_value">Business Value</label><br>
+        <input type="number"  name="business_value" id="business_value"7777min="100" max="1500" step="100"
+        {% if id_ %}value="{{business_value}}" {%else%} value="1000"{%endif%}><br>
+        <label for="estimation">Estimation (h) </label><br>
+        <input type="number"  name="estimation" id="estimation"min="0.5" max="40" step="0.5"
+        {%if id_%}value="{{estimation}}" {%else%} value="2.5"{%endif%}><br>
+        <label for="status">Status</label><br>
+        <select name="status" id="status">
             <option value="Planning"{%if id_ and status=="Planning"%}selected{%endif%}>Planning</option>
             <option value="TODO"{%if id_ and status=="TODO"%}selected{%endif%}>TODO</option>
             <option value="In Progress"{%if id_ and status=="In Progress"%}selected{%endif%}>In Progress</option>
